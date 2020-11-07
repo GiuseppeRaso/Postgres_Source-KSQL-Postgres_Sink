@@ -44,8 +44,9 @@ CREATE OR REPLACE STREAM take_ids WITH (
 
 ## Sink connector
 
-Execute the sink.sh script to run the sink connector
-Go into postgres sink and verify that data is present;
+Execute the sink.sh script to run the sink connector.
+
+Go into postgres sink and verify that data is present
 
 ```
 psql -U postgres
@@ -71,6 +72,6 @@ TERMINATE <query>;
 - In order to restart a connector, just remove the old one and rename it (https://stackoverflow.com/questions/55377441/restart-kafka-connect-sink-and-source-connectors-to-read-from-beginning)
 - Tombstones must be absent in the stream or sink connector will not work
 
-## TODO
+## Todo
 
-- At the moment, delete is not reflected; make tombstones readable by the stream and then delete the old rows with delete.enabled="true"
+- At the moment, delete queries are not reflected; make tombstones readable by the stream and then delete the old rows with delete.enabled="true"
