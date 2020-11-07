@@ -1,0 +1,21 @@
+{
+  "name": "pgsink",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+    "connection.url": "jdbc:postgresql://postgres-sink:5432/postgres",
+    "connection.user": "postgres",
+    "connection.password": "postgres",
+    "tasks.max": "1",
+    "insert.mode": "upsert",
+    "topics": "take_ids",
+    "auto.create": "true",
+    "auto.evolve": "true",
+    "pk.mode": "record_value",
+    "pk.fields": "id",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "http://schema-registry:8081",
+    "key.converter.schemas.enable": "false",
+    "value.converter.schemas.enable": "true"
+  }
+}

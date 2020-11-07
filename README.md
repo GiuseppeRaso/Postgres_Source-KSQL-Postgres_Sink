@@ -1,4 +1,6 @@
-# Postgres Source
+# Postgres -> Kafka -> Postgres
+
+## Postgres Source
 
 First: put some data into postgres source
 
@@ -11,11 +13,11 @@ INSERT INTO customers (id, name, age) VALUES ('7', 'sue', 25);
 INSERT INTO customers (id, name, age) VALUES ('2', 'bill', 51);
 ```
 
-# Source connector
+## Source connector
 
 Execute the send.sh script to run the source connector
 
-# KSQL
+## KSQL
 
 Run these command in the cli
 
@@ -40,7 +42,7 @@ CREATE OR REPLACE STREAM take_ids WITH (
     EMIT CHANGES;
 ```
 
-# Sink connector
+## Sink connector
 
 Execute the sink.sh script to run the sink connector
 Go into postgres sink and verify that data is present;
@@ -57,18 +59,18 @@ SHOW CONNECTORS;
 DESCRIBE CONNECTOR "pgsink";
 ```
 
-# Useful commands
+## Useful commands
 
 ```
 DROP STREAM [IF EXISTS] <stream_name> [DELETE TOPIC];
 TERMINATE <query>;
 ```
 
-# Notes
+## Notes
 
 - In order to restart a connector, just remove the old one and rename it (https://stackoverflow.com/questions/55377441/restart-kafka-connect-sink-and-source-connectors-to-read-from-beginning)
 - Tombstones must be absent in the stream or sink connector will not work
 
-# TODO
+## TODO
 
 - At the moment, delete is not reflected; make tombstones readable by the stream and then delete the old rows with delete.enabled="true"
